@@ -20,7 +20,7 @@
 
 - config.json配置文件支持热更新
 
-2023年7月28日，进行了界面改版和升级
+2024年05月08日，进行了界面改版和升级
 
 ![](pc.png)
 
@@ -74,6 +74,7 @@ git clone https://github.com/Yuuuuu0/rss-reader.git
 进入rss-reader文件夹，运行项目
 
 ```bash
+docker build .
 docker-compose up -d
 ```
 
