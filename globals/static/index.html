@@ -13,22 +13,34 @@
     <link rel="stylesheet" href="static/dark-mode.css">
   << end >>
   <link rel="icon" href="static/favicon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/style.css" media="all" onload="this.media='all'">
   <style>
     body {
-      font-family: "Avenir", Helvetica, Arial, sans-serif;
+      font-family: "LXGW WenKai Screen", "Avenir", Helvetica, Arial, sans-serif;
+      line-height: 1.25em;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-align: center;
       color: #2c3e50;
       margin-top: 30px;
+      background-image: linear-gradient(#d4d4d4 1px,transparent 0),linear-gradient(90deg,#d4d4d4 1px,transparent 0);
+      background-size: 32px 32px;
+      background-color: #fffcf8;
     }
 
     .card-header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 18px;
+      font-size: 14px;
       font-weight: bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: left;
+      margin-bottom: 10px;
+      background: linear-gradient(to bottom, #007f80, #007070);
+      color: white;
+      line-height: 2em;
+      border-radius: 6px;
+      padding: 0 0.5em;
     }
 
     .list-item {
@@ -40,9 +52,7 @@
 
     .list-item-title {
       display: flex;
-      /* white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis; */
+       
       flex-grow: 1;
       text-align: left;
       width: 100%;
@@ -65,6 +75,25 @@
       font-size: 12px;
       color: #999;
     }
+
+    .el-link {
+      white-space: nowrap;
+      font-size: 14px;
+    }
+    .list-item-title{
+      margin-bottom: 2px;
+    }
+    .list-item-title > span:first-child {
+      font-size: 10px;
+      margin-right: 2px;
+    }
+    .el-scrollbar__wrap {
+      overflow-y: scroll;
+    }
+    div#app{
+      max-width: 1920px;
+      margin:0 auto;
+    }
   </style>
 </head>
 
@@ -75,7 +104,9 @@
         <h1>
           RSS Reader
           << if gt .AutoUpdatePush 0 >>
-            <span v-show="isPc"><br/>{{ countdown }} s</span>
+            <span v-show="isPc" class="el-link el-link--default is-underline" id="busuanzi_container_site_uv" style="display: inline;">
+              本页{{ countdown }}秒后自动刷新
+            </span>
           << end >>
         </h1>
       </el-header>
@@ -89,7 +120,7 @@
                     << $feed.Title >>
                   </span>
                 </div>
-                <el-scrollbar style="height: 300px;">
+                <el-scrollbar style="height: 440px;">
                   << range $i, $item :=$feed.Items >>
                     <el-list key="<< $i >>">
                       <el-list-item>
@@ -118,7 +149,7 @@
                   <div slot="header" class="card-header">
                     <span>{{ feed.title }}</span>
                   </div>
-                  <el-scrollbar style="height: 300px;">
+                  <el-scrollbar style="height: 440px;">
                     <el-list v-for="(item, i) in feed.items" :key="i">
                       <el-list-item>
                         <div class="list-item-title">
@@ -136,9 +167,9 @@
         </el-row>
       </el-main>
       <el-footer>
-        <el-link href="https://github.com/srcrs/rss-reader" target="_blank">Rss-reader</el-link>
+        <el-link target="_blank">RSS Reader © All rights reserved</el-link>
         <span> | </span>
-        <el-link href="https://github.com/srcrs" target="_blank">By srcrs</el-link>
+        <el-link href="https://github.com/srcrs/rss-reader" target="_blank">Powered by srcrs</el-link>
       </el-footer>
     </el-container>
   </div>
